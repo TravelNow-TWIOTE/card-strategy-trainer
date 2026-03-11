@@ -8,8 +8,8 @@ let dealer = []
 let gameActive = false
 let insuranceBet = 0
 
-function updateBankroll(){
-document.getElementById("bankroll").innerText = "Points: " + points
+function updatePoints(){
+document.getElementById("points").innerText = "Points: " + points
 }
 
 function createDeck(){
@@ -66,14 +66,14 @@ document.getElementById("playerTotal").innerText =
 document.getElementById("dealerTotal").innerText =
 "Total: "+handValue(dealer)
 
-updateBankroll()
+updatePoints()
 }
 
-function placeBet(){
+function placeWager(){
 
 if(gameActive) return
 
-bet=parseInt(document.getElementById("wagerInput").value)
+wager=parseInt(document.getElementById("wagerInput").value)
 
 createDeck()
 
@@ -123,7 +123,7 @@ function doubleDown(){
 
 if(!gameActive) return
 
-bet*=2
+wager*=2
 
 player.push(draw())
 
@@ -148,7 +148,7 @@ function insurance(){
 if(!gameActive) return
 
 insuranceWager=wager/2
-bankroll-=insuranceWager
+points-=insuranceWager
 
 document.getElementById("message").innerText="Insurance placed"
 
@@ -182,7 +182,7 @@ else{
 document.getElementById("message").innerText="Push."
 }
 
-updateBankroll()
+updatePoints()
 }
 
 function rebuy(){
