@@ -1,5 +1,5 @@
-let bankroll = 1000
-let bet = 0
+let points = 1000
+let wager = 0
 
 let deck = []
 let player = []
@@ -9,7 +9,7 @@ let gameActive = false
 let insuranceBet = 0
 
 function updateBankroll(){
-document.getElementById("bankroll").innerText = "Bankroll: $" + bankroll
+document.getElementById("bankroll").innerText = "Points: " + points
 }
 
 function createDeck(){
@@ -73,7 +73,7 @@ function placeBet(){
 
 if(gameActive) return
 
-bet=parseInt(document.getElementById("betInput").value)
+bet=parseInt(document.getElementById("wagerInput").value)
 
 createDeck()
 
@@ -147,12 +147,12 @@ function insurance(){
 
 if(!gameActive) return
 
-insuranceBet=bet/2
-bankroll-=insuranceBet
+insuranceWager=wager/2
+bankroll-=insuranceWager
 
 document.getElementById("message").innerText="Insurance placed"
 
-updateBankroll()
+updatePoints()
 
 }
 
@@ -186,8 +186,8 @@ updateBankroll()
 }
 
 function rebuy(){
-bankroll+=1000
-updateBankroll()
+points+=1000
+updatePoints()
 }
 
-updateBankroll()
+updatePoints()
