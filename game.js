@@ -53,11 +53,22 @@ function render(){
 document.getElementById("player").innerText=
 player.map(c=>c.r+c.s).join(" ")
 
-document.getElementById("dealer").innerText=
+if(active){
+document.getElementById("dealer").innerText =
+"?? " + dealer.slice(1).map(c=>c.r+c.s).join(" ")
+}
+else{
+document.getElementById("dealer").innerText =
 dealer.map(c=>c.r+c.s).join(" ")
+}
 
 document.getElementById("playerTotal").innerText="Total: "+total(player)
+if(active){
+document.getElementById("dealerTotal").innerText="Total: ?"
+}
+else{
 document.getElementById("dealerTotal").innerText="Total: "+total(dealer)
+}
 
 update()
 }
