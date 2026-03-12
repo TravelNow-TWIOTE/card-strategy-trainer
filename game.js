@@ -67,63 +67,55 @@ return deck.pop()
 
 function render(){
 
-renderDealer()
+let dealerHTML=""
+
+if(active){
+
+dealerHTML+="<img src='https://deckofcardsapi.com/static/img/back.png'>"
+dealerHTML+="<img src='"+cardImage(dealer[1])+"'>"
+
+document.getElementById("dealerTotal").innerText="Total: ?"
+
+}
+else{
+
+for(let c of dealer){
+dealerHTML+="<img src='"+cardImage(c)+"'>"
+}
+
+document.getElementById("dealerTotal").innerText="Total: "+total(dealer)
+
+}
+
+document.getElementById("dealer").innerHTML=dealerHTML
+
 renderHands()
 
 update()
 
 }
 
-function renderDealer(){
-
-let html = ""
-
-if(active){
-
-html += "<img src='https://deckofcardsapi.com/static/img/back.png'>"
-
-if(dealer.length>1){
-html += "<img src='" + cardImage(dealer[1]) + "'>"
-}
-
-document.getElementById("dealerTotal").innerText = "Total: ?"
-
-}
-else{
-
-for(let c of dealer){
-html += "<img src='" + cardImage(c) + "'>"
-}
-
-document.getElementById("dealerTotal").innerText = "Total: " + total(dealer)
-
-}
-
-document.getElementById("dealer").innerHTML = html
-
-}
-
 function renderHands(){
 
-let h1 = ""
+let h1=""
 
 for(let c of hands[0]){
-h1 += "<img src='" + cardImage(c) + "'>"
+h1+="<img src='"+cardImage(c)+"'>"
 }
 
-document.getElementById("hand1").innerHTML = h1
-document.getElementById("total1").innerText = "Total: " + total(hands[0])
+document.getElementById("hand1").innerHTML=h1
+document.getElementById("total1").innerText="Total: "+total(hands[0])
 
 if(hands.length>1){
 
-let h2 = ""
+let h2=""
 
 for(let c of hands[1]){
-h2 += "<img src='" + cardImage(c) + "'>"
+h2+="<img src='"+cardImage(c)+"'>"
 }
 
-document.getElementById("hand2").innerHTML = h2
-document.getElementById("total2").innerText = "Total: " + total(hands[1])
+document.getElementById("hand2").innerHTML=h2
+document.getElementById("total2").innerText="Total: "+total(hands[1])
 
 }
 
@@ -133,26 +125,22 @@ function start(){
 
 if(active) return
 
-wager = parseInt(document.getElementById("bet").value)
+wager=parseInt(document.getElementById("bet").value)
 
-if(isNaN(wager) || wager<=0){
-document.getElementById("msg").innerText = "Enter valid points"
-return
-}
-
-if(wager > points){
-document.getElementById("msg").innerText = "Not enough points"
+if(wager>points){
+document.getElementById("msg").innerText="Not enough points"
 return
 }
 
 deckBuild()
 
-dealer = [draw(), draw()]
+dealer=[draw(),draw()]
 
-hands = [[draw(), draw()]]
-activeHand = 0
+hands=[[draw(),draw()]]
 
-active = true
+activeHand=0
+
+active=true
 
 render()
 
@@ -164,7 +152,7 @@ if(!active) return
 
 hands[activeHand].push(draw())
 
-if(total(hands[activeHand]) > 21){
+if(total(hands[activeHand])>21){
 nextHand()
 }
 
@@ -172,32 +160,20 @@ render()
 
 }
 
-function stand(){
-
-if(!active) return
-
-nextHand()
-
-}
-
 function nextHand(){
 
-if(activeHand < hands.length-1){
-
+if(activeHand<hands.length-1){
 activeHand++
-
 }
 else{
-
-dealerTurn()
-
+stand()
 }
 
 }
 
-function dealerTurn(){
+function stand(){
 
-while(total(dealer) < 17){
+while(total(dealer)<17){
 dealer.push(draw())
 }
 
@@ -206,8 +182,6 @@ finish()
 }
 
 function doublePlay(){
-
-if(!active) return
 
 hands[activeHand].push(draw())
 
@@ -219,25 +193,21 @@ render()
 
 function split(){
 
-if(!active) return
+let h=hands[0]
 
-let h = hands[0]
+if(h.length!==2) return
 
-if(h.length !== 2) return
-
-if(h[0].r !== h[1].r){
-
-document.getElementById("msg").innerText = "Cannot split"
+if(h[0].r!==h[1].r){
+document.getElementById("msg").innerText="Cannot split"
 return
-
 }
 
-hands = [
-[h[0], draw()],
-[h[1], draw()]
+hands=[
+[h[0],draw()],
+[h[1],draw()]
 ]
 
-activeHand = 0
+activeHand=0
 
 render()
 
@@ -245,22 +215,22 @@ render()
 
 function finish(){
 
-active = false
+active=false
 
-let dealerTotal = total(dealer)
+let dealerTotal=total(dealer)
 
 for(let h of hands){
 
-let p = total(h)
+let p=total(h)
 
-if(p > 21){
-points -= wager
+if(p>21){
+points-=wager
 }
-else if(dealerTotal > 21 || p > dealerTotal){
-points += wager
+else if(dealerTotal>21||p>dealerTotal){
+points+=wager
 }
-else if(p < dealerTotal){
-points -= wager
+else if(p<dealerTotal){
+points-=wager
 }
 
 }
@@ -272,11 +242,8 @@ update()
 }
 
 function add(){
-
-points += 1000
-
+points+=1000
 update()
-
 }
 
 update()
