@@ -6,6 +6,20 @@ let dealer=[]
 let active=false
 let shieldBet=0
 
+function cardImage(c){
+
+let suit=c.s
+let rank=c.r
+
+if(rank==="A") rank="A"
+if(rank==="J") rank="J"
+if(rank==="Q") rank="Q"
+if(rank==="K") rank="K"
+
+return "https://deckofcardsapi.com/static/img/"+rank+suit+".png"
+
+}
+
 function update(){
 document.getElementById("points").innerText="Points: "+points
 }
