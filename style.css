@@ -16,11 +16,15 @@ font-weight:bold;
 margin:10px;
 }
 
-input{
-padding:6px;
-font-size:16px;
+.cards{
+margin:15px;
+}
+
+.cards img{
 width:80px;
-text-align:center;
+margin:5px;
+border-radius:6px;
+box-shadow:0 4px 8px rgba(0,0,0,0.5);
 }
 
 button{
@@ -36,13 +40,6 @@ cursor:pointer;
 
 button:hover{
 background:#259a4f;
-}
-
-.cards{
-font-size:34px;
-letter-spacing:10px;
-margin:15px;
-font-weight:bold;
 }
 
 #dealerTotal,#playerTotal{
